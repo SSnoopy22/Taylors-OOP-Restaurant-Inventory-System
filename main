@@ -1,1 +1,107 @@
-System.out.println("Hello World");
+package com.company;
+
+import java.security.cert.TrustAnchor;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner Input = new Scanner(System.in);
+        List<List<String>> inventoryTable = new ArrayList<List<String>>();
+        inventoryTable.get(0).set(0, "Item Name");
+        inventoryTable.get(0).set(1, "Item Type");
+        inventoryTable.get(0).set(2, "Quantity");
+        inventoryTable.get(0).set(3, "Expiry Date");
+        inventoryTable.get(0).set(4, "Price");
+        inventoryTable.get(0).set(5, "Date of Purchase");
+
+	    boolean ask = true;
+	    while (ask = true){
+	        int x = 0;
+	        int rowNum = 1;
+	        if (x== 0){
+	            System.out.println("Welcome, This is an Inventory management system which allows you to keep track of all your purchases.");
+
+	            String itemName = "";
+                System.out.println("Write Down the item name:");
+                itemName = Input.nextLine();
+
+                String itemType = "";
+                System.out.println("Write Down the type of Item that " + itemName + " is:");
+                itemType = Input.nextLine();
+
+                String itemQuantity = "";
+                System.out.println("Write Down the quantity of " + itemName + " that you have purchased:");
+                itemQuantity = Input.nextLine();
+
+                String itemExpiryDate = "";
+                System.out.println("Write Down the Expiry Date of " + itemName + ":");
+                itemExpiryDate = Input.nextLine();
+
+                String itemPrice = "";
+                System.out.println("Write Down the Price of one " + itemName + ":");
+                itemPrice = Input.nextLine();
+
+                String itemDateOfPurchase = "";
+                System.out.println("Write Down the Date you purchase " + itemName + ":");
+                itemDateOfPurchase = Input.nextLine();
+
+                inventoryTable.get(rowNum).set(0, itemName);
+                inventoryTable.get(rowNum).set(1, itemType);
+                inventoryTable.get(rowNum).set(2, itemQuantity);
+                inventoryTable.get(rowNum).set(3, itemExpiryDate);
+                inventoryTable.get(rowNum).set(4, itemPrice);
+                inventoryTable.get(rowNum).set(5, itemDateOfPurchase);
+
+                x++;
+            }
+	        else{
+                System.out.println("Do you want to enter more New Items?\nIf Yes, type 0.\nIf No, type 1");
+                if (Input.nextInt() == 0){
+                    String itemName = "";
+                    System.out.println("Item name:");
+                    itemName = Input.nextLine();
+
+                    String itemType = "";
+                    System.out.println("Item Type:");
+                    itemType = Input.nextLine();
+
+                    String itemQuantity = "";
+                    System.out.println("Quantity of Item purchased:");
+                    itemQuantity = Input.nextLine();
+
+                    String itemExpiryDate = "";
+                    System.out.println("Item Expiry Date:");
+                    itemExpiryDate = Input.nextLine();
+
+                    String itemPrice = "";
+                    System.out.println("Price of one of the Item:");
+                    itemPrice = Input.nextLine();
+
+                    String itemDateOfPurchase = "";
+                    System.out.println("Date of Purchase:");
+                    itemDateOfPurchase = Input.nextLine();
+
+                    inventoryTable.get(rowNum).set(0, itemName);
+                    inventoryTable.get(rowNum).set(1, itemType);
+                    inventoryTable.get(rowNum).set(2, itemQuantity);
+                    inventoryTable.get(rowNum).set(3, itemExpiryDate);
+                    inventoryTable.get(rowNum).set(4, itemPrice);
+                    inventoryTable.get(rowNum).set(5, itemDateOfPurchase);
+                }
+                else if (Input.nextInt() == 1){
+                    ask = false;
+                    break;
+                }
+                else{
+                    System.out.println("That is an invalid response");
+                }
+            }
+        }
+        System.out.println(inventoryTable);
+
+    }
+}
