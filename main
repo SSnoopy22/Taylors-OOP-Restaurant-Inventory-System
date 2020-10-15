@@ -8,7 +8,7 @@ public class Main {
         Scanner Input = new Scanner(System.in);
 
         // Declare An Arraylist with an Array inside(2D Array List)
-        List<String[]> inventoryTable = new ArrayList<String[]>();
+        List<String[]> inventoryTable = new ArrayList<>();
 
         // Add First Row of Header to InventoryTable
         inventoryTable.add(new String[] {
@@ -21,12 +21,12 @@ public class Main {
         });
 
         // Create Used Variables
-        String itemName = "";
-        String itemType = "";
-        String itemQuantity = "";
-        String itemPrice = "";
-        String itemExpiryDate = "";
-        String itemDateOfPurchase = "";
+        String itemName;
+        String itemType;
+        String itemQuantity;
+        String itemPrice;
+        String itemExpiryDate;
+        String itemDateOfPurchase;
         boolean firstTime = true;
 
         //Initial Data Collection
