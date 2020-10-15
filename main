@@ -1,107 +1,160 @@
 package com.company;
 
-import java.security.cert.TrustAnchor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner Input = new Scanner(System.in);
-        List<List<String>> inventoryTable = new ArrayList<List<String>>();
-        inventoryTable.get(0).set(0, "Item Name");
-        inventoryTable.get(0).set(1, "Item Type");
-        inventoryTable.get(0).set(2, "Quantity");
-        inventoryTable.get(0).set(3, "Expiry Date");
-        inventoryTable.get(0).set(4, "Price");
-        inventoryTable.get(0).set(5, "Date of Purchase");
 
-	    boolean ask = true;
-	    while (ask = true){
-	        int x = 0;
-	        int rowNum = 1;
-	        if (x== 0){
-	            System.out.println("Welcome, This is an Inventory management system which allows you to keep track of all your purchases.");
+        // Declare An Arraylist with an Array inside(2D Array List)
+        List<String[]> inventoryTable = new ArrayList<String[]>();
 
-	            String itemName = "";
-                System.out.println("Write Down the item name:");
+        // Add First Row of Header to InventoryTable
+        inventoryTable.add(new String[] {
+                "Item Name",
+                "Item Type",
+                "Quantity",
+                "Price",
+                "Expiry Date",
+                "Date of Purchase"
+        });
+
+        // Create Used Variables
+        String itemName = "";
+        String itemType = "";
+        String itemQuantity = "";
+        String itemPrice = "";
+        String itemExpiryDate = "";
+        String itemDateOfPurchase = "";
+        boolean firstTime = true;
+
+        //Initial Data Collection
+        while (true){
+
+	        if (firstTime){
+	            // Loop for First Item
+	            System.out.println("\nWelcome, This is an Inventory management system which allows you to keep track of all your purchases.");
+
+	            // Item Name
+                System.out.println("\nWrite Down the item name:");
                 itemName = Input.nextLine();
 
-                String itemType = "";
-                System.out.println("Write Down the type of Item that " + itemName + " is:");
+                // Item Type
+                System.out.println("\nWrite Down the type of Item that " + itemName + " is:");
                 itemType = Input.nextLine();
 
-                String itemQuantity = "";
-                System.out.println("Write Down the quantity of " + itemName + " that you have purchased:");
+                // Item Quantity
+                System.out.println("\nWrite Down the quantity of " + itemName + "(s) that you have purchased:");
                 itemQuantity = Input.nextLine();
 
-                String itemExpiryDate = "";
-                System.out.println("Write Down the Expiry Date of " + itemName + ":");
-                itemExpiryDate = Input.nextLine();
-
-                String itemPrice = "";
-                System.out.println("Write Down the Price of one " + itemName + ":");
+                // Item Price
+                System.out.println("\nWrite Down the Price of one " + itemName + "(s) in your local currency:");
                 itemPrice = Input.nextLine();
 
-                String itemDateOfPurchase = "";
-                System.out.println("Write Down the Date you purchase " + itemName + ":");
+                // Item Expiry Date
+                System.out.println("\nWrite Down the Expiry Date of the " + itemName + "(s) in form dd/mm/yyyy:");
+                itemExpiryDate = Input.nextLine();
+                    // Date Error check
+                    while (itemExpiryDate.length() != 10){
+                        System.out.println("\nThat was an invalid input.\nPlease write in form dd/mm/yyyy(if the number has a single digit, then add a zero at the start))");
+                        System.out.println("\nWrite Down the Expiry Date of the " + itemName + "(s):");
+                        itemExpiryDate = Input.nextLine();
+                    }
+
+                // Item Date of Purchase
+                System.out.println("\nWrite Down the Date you purchased the " + itemName + "(s) in form dd/mm/yyyy:");
                 itemDateOfPurchase = Input.nextLine();
+                    // Date Error check
+                    while (itemDateOfPurchase.length() != 10){
+                        System.out.println("\nThat was an invalid input.\nPlease write in form dd/mm/yyyy(if the number has a single digit, then add a zero at the start))");
+                        System.out.println("\nWrite Down the Date of purchase for the " + itemName + "(s):");
+                        itemDateOfPurchase = Input.nextLine();
+                    }
 
-                inventoryTable.get(rowNum).set(0, itemName);
-                inventoryTable.get(rowNum).set(1, itemType);
-                inventoryTable.get(rowNum).set(2, itemQuantity);
-                inventoryTable.get(rowNum).set(3, itemExpiryDate);
-                inventoryTable.get(rowNum).set(4, itemPrice);
-                inventoryTable.get(rowNum).set(5, itemDateOfPurchase);
+                //Create anonymous array of Item Info and Add to InventoryTable ArrayList as new row
+                inventoryTable.add(new String[] {
+                        itemName,
+                        itemType,
+                        itemQuantity,
+                        itemPrice,
+                        itemExpiryDate,
+                        itemDateOfPurchase
+                });
 
-                x++;
+                firstTime = false;
             }
+
+
 	        else{
-                System.out.println("Do you want to enter more New Items?\nIf Yes, type 0.\nIf No, type 1");
-                if (Input.nextInt() == 0){
-                    String itemName = "";
+	            // Continue?
+                System.out.println("\n\nDo you want to enter more New Items?\nIf Yes, type 1.\nIf No, type 2");
+                int choice = Input.nextInt();
+                if (choice == 1){
+
+                    Input.nextLine(); // IDK why this has to be here, but the first input won't register without it
+
+                    //Item Name
                     System.out.println("Item name:");
                     itemName = Input.nextLine();
 
-                    String itemType = "";
+                    // Item Type
                     System.out.println("Item Type:");
                     itemType = Input.nextLine();
 
-                    String itemQuantity = "";
+                    // Item Quantity
                     System.out.println("Quantity of Item purchased:");
                     itemQuantity = Input.nextLine();
 
-                    String itemExpiryDate = "";
-                    System.out.println("Item Expiry Date:");
-                    itemExpiryDate = Input.nextLine();
-
-                    String itemPrice = "";
-                    System.out.println("Price of one of the Item:");
+                    // Item Price
+                    System.out.println("Price per 1 " + itemName + ":");
                     itemPrice = Input.nextLine();
 
-                    String itemDateOfPurchase = "";
+                    // Item Expiry Date
+                    System.out.println("Item Expiry Date:");
+                    itemExpiryDate = Input.nextLine();
+                        // Date Error check
+                        while (itemExpiryDate.length() != 10){
+                            System.out.println("\nThat was an invalid input.\nPlease write in form dd/mm/yyyy(if the number has a single digit, then add a zero at the start))");
+                            System.out.println("\nWrite Down the Expiry Date of the " + itemName + "(s):");
+                            itemExpiryDate = Input.nextLine();
+                        }
+
+                    // Item Date of Purchase
                     System.out.println("Date of Purchase:");
                     itemDateOfPurchase = Input.nextLine();
+                        // Date Error check
+                        while (itemDateOfPurchase.length() != 10){
+                            System.out.println("\nThat was an invalid input.\nPlease write in form dd/mm/yyyy(if the number has a single digit, then add a zero at the start))");
+                            System.out.println("\nDate of Purchase(s):");
+                            itemDateOfPurchase = Input.nextLine();
+                        }
 
-                    inventoryTable.get(rowNum).set(0, itemName);
-                    inventoryTable.get(rowNum).set(1, itemType);
-                    inventoryTable.get(rowNum).set(2, itemQuantity);
-                    inventoryTable.get(rowNum).set(3, itemExpiryDate);
-                    inventoryTable.get(rowNum).set(4, itemPrice);
-                    inventoryTable.get(rowNum).set(5, itemDateOfPurchase);
+                    //Create anonymous array of Item Info and Add to InventoryTable ArrayList as new row
+                    inventoryTable.add(new String[] {
+                            itemName,
+                            itemType,
+                            itemQuantity,
+                            itemPrice,
+                            itemExpiryDate,
+                            itemDateOfPurchase
+                    });
+
                 }
-                else if (Input.nextInt() == 1){
-                    ask = false;
+
+
+                else if (choice == 2){
                     break;
                 }
+
+
                 else{
                     System.out.println("That is an invalid response");
                 }
             }
         }
-        System.out.println(inventoryTable);
+        // Print Full ArrayList as String
+        System.out.println(Arrays.deepToString(inventoryTable.toArray()));
 
     }
 }
