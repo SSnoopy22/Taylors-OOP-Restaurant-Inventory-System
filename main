@@ -1,5 +1,3 @@
-package Main;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -105,7 +103,7 @@ public class Main {
                         else{
                             // Ask user if they wish to add more items
                             System.out.println("\n\nDo you want to enter more New Items?\nIf Yes, type 1.\nIf No, type 2");
-                            int choice = Input.nextInt(); 
+                            int choice = Input.nextInt();
                             if (choice == 1){
 
                                 Input.nextLine(); // IDK why this has to be here, but the first input won't register without it
@@ -182,7 +180,7 @@ public class Main {
 
             else {
                 //danish
-                System.out.println("\n\nWhat would you like to do?\n1 - Add row(s) to Inventory Table\n2 - Edit information in Inventory Table\n3 - Print Inventory Table\n4 - Analysis of Entity Usage\n5- Budget Management\n6 - Quit");
+                System.out.println("\n\nWhat would you like to do?\n1 - Add row(s) to Inventory Table\n2 - Print Inventory Table\n3 - Analysis of Entity Usage\n4- Budget Management\n5 - Quit");
                 String choice1 = Input.nextLine();
 
                 if (choice1.equals("1")) {
@@ -253,97 +251,99 @@ public class Main {
                     // Print Full ArrayList as String
                     System.out.println(Arrays.deepToString(inventoryTable.toArray()));
                 }
-                else if (choice1.equals("4")) {
-                    // Analysis of entity 
+                else if (choice1.equals("3")) {
+                    // Analysis of entity
                     boolean check = true;
-                    
-                    while(check) {
-                        System.out.println("\n\nWhat would you like to do?\n1 - Total amount of product bought in a month\n2 - Highest amount of money spend on one entity\n3 - back");      
-                   int choice =  Input.nextInt();
-                    if(choice == 1) {
-                        System.out.println("\n\nPlease select the desire month?\n for example\n01 - January\n02 - February\n03 - March\n04 - April\n05 - May\n06 - June\n07 - July\n08 - August\n09 - September\n10 - October\n11 - November\n12 - December");
-                        int choiceMonth = Input.nextInt();
-                        float totatAmount = 0;
-                        for (int rowIterator = 0; rowIterator < inventoryTable.size(); rowIterator++) {
-                            String[] row = inventoryTable.get(rowIterator);
-                          if(rowIterator!= 0) {    //should not take headers row
-                        	  try {
-                                  String itemPerchasedDate =  row[5];
-                                  String[] spliterbySlash =  itemPerchasedDate.split("/");
-                                  int tempMonth = Integer.parseInt( spliterbySlash[1]); 
-                                 if(tempMonth == choiceMonth) {
-                                     int tempTotalAmount = Integer.parseInt(row[2]) * Integer.parseInt(row[3]); // itemQuantity * itemPrice
-                                     totatAmount += tempTotalAmount;
-                                 }
-                                } catch(Exception e) {	
-                                    System.out.println("Something went wrong please try again!");
-                                    System.out.println(e.getMessage());
-                                    e.printStackTrace();
-                                    break;
-                                }
-                          }
-                        }
-                        System.out.println("Total amount of product bought in a month" + totatAmount);
-                    } else if(choice == 2) {
-                        // Highest amount of money spend on one entity
-                        float highestAmount = 0; 
 
-                        for (int rowIterator = 1; rowIterator < inventoryTable.size(); rowIterator++) {
-                            String[] row = inventoryTable.get(rowIterator);
-                            int tempTotalAmount = Integer.parseInt(row[2]) * Integer.parseInt(row[3]); // itemQuantity * itemPrice
-                            if( highestAmount < tempTotalAmount) {
-                                highestAmount = tempTotalAmount;
-                            }                
+                    while(check) {
+                        System.out.println("\n\nWhat would you like to do?\n1 - Total amount of product bought in a month\n2 - Highest amount of money spend on one entity\n3 - back");
+                        int choice =  Input.nextInt();
+                        if(choice == 1) {
+                            System.out.println("\n\nPlease select the desire month?\n for example\n01 - January\n02 - February\n03 - March\n04 - April\n05 - May\n06 - June\n07 - July\n08 - August\n09 - September\n10 - October\n11 - November\n12 - December");
+                            int choiceMonth = Input.nextInt();
+                            float totatAmount = 0;
+                            for (int rowIterator = 0; rowIterator < inventoryTable.size(); rowIterator++) {
+                                String[] row = inventoryTable.get(rowIterator);
+                                if(rowIterator!= 0) {    //should not take headers row
+                                    try {
+                                        String itemPerchasedDate =  row[5];
+                                        String[] spliterbySlash =  itemPerchasedDate.split("/");
+                                        int tempMonth = Integer.parseInt( spliterbySlash[1]);
+                                        if(tempMonth == choiceMonth) {
+                                            int tempTotalAmount = Integer.parseInt(row[2]) * Integer.parseInt(row[3]); // itemQuantity * itemPrice
+                                            totatAmount += tempTotalAmount;
+                                        }
+                                    } catch(Exception e) {
+                                        System.out.println("Something went wrong please try again!");
+                                        System.out.println(e.getMessage());
+                                        e.printStackTrace();
+                                        break;
+                                    }
+                                }
+                            }
+                            System.out.println("Total amount of product bought in a month" + totatAmount);
+                        } else if(choice == 2) {
+                            // Highest amount of money spend on one entity
+                            float highestAmount = 0;
+
+                            for (int rowIterator = 1; rowIterator < inventoryTable.size(); rowIterator++) {
+                                String[] row = inventoryTable.get(rowIterator);
+                                int tempTotalAmount = Integer.parseInt(row[2]) * Integer.parseInt(row[3]); // itemQuantity * itemPrice
+                                if( highestAmount < tempTotalAmount) {
+                                    highestAmount = tempTotalAmount;
+                                }
+                            }
+                            System.out.println("Highest amount of money spent on one entity" + highestAmount);
+                        } else if(choice == 3) {
+                            check = false;
+                            break;
+                        } else {
+                            System.out.println("That was an invalid input.");
+                            break;
                         }
-                        System.out.println("Highest amount of money spent on one entity" + highestAmount);
-                    } else if(choice == 3) {
-                        check = false;
-                        break;
-                    } else {
-                        System.out.println("That was an invalid input.");
-                        break;
                     }
-                    }
-                } else if(choice1.equals("5")){
+                } 
+                else if(choice1.equals("4")){
                     //ADD comment and Print Statement
                     boolean check = true;
-                     while(check) {
+                    while(check) {
                         System.out.println("\n\nWhat would you like to do?\n1 - Total amount of money spent distributed by product category \n2 - Net Spending n\n3 - back");
                         int choice = Input.nextInt();
                         if(choice == 1) {
-                        	Map<String, Float> itemTypeByAmount = new HashMap<String,Float>();
-                        	float totalAmountPerItem = 0;
-                        	for (int rowIterator = 1; rowIterator < inventoryTable.size(); rowIterator++) {
-                        		   String[] row = inventoryTable.get(rowIterator);
-                        		   totalAmountPerItem = Integer.parseInt(row[2]) * Integer.parseInt(row[3]) ;
-                        		   itemTypeByAmount.put(row[1], totalAmountPerItem);
-                        	}
-                        	
-                        	// printing hashmap to show result
-                        	
-                        	System.out.print("Total amount of money spent distributed by product category \\n");
-                        	System.out.print(Arrays.asList(itemTypeByAmount));
-                        	
-                            
+                            Map<String, Float> itemTypeByAmount = new HashMap<String,Float>();
+                            float totalAmountPerItem = 0;
+                            for (int rowIterator = 1; rowIterator < inventoryTable.size(); rowIterator++) {
+                                String[] row = inventoryTable.get(rowIterator);
+                                totalAmountPerItem = Integer.parseInt(row[2]) * Integer.parseInt(row[3]) ;
+                                itemTypeByAmount.put(row[1], totalAmountPerItem);
+                            }
+
+                            // printing hashmap to show result
+
+                            System.out.print("Total amount of money spent distributed by product category \\n");
+                            System.out.print(Arrays.asList(itemTypeByAmount));
+
+
                         } else if( choice == 2) {
                             // Net Spending Add Print statement
                             float totatAmount = 0;
                             for (int rowIterator = 1; rowIterator < inventoryTable.size(); rowIterator++) {
                                 String[] row = inventoryTable.get(rowIterator);
-                                totatAmount = totatAmount + ( Integer.parseInt(row[2]) * Integer.parseInt(row[3]) ); 
-                                 
+                                totatAmount = totatAmount + ( Integer.parseInt(row[2]) * Integer.parseInt(row[3]) );
+
                             }
                             System.out.println("Net Spending " + totatAmount);
                         } else if(choice == 3) {
-                        	check = false;
-                        	break;
+                            check = false;
+                            break;
                         }
-                     }
+                    }
                 }
-                else if(choice1.equals("6")){
-                    //Quit 
+                else if(choice1.equals("5")){
+                    //Quit
                     System.exit(0);
-                } else {
+                } 
+                else {
                     System.out.println("That was an invalid input.");
                 }
             }
